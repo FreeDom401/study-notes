@@ -28,7 +28,10 @@ EOF是bash中定义的一个结束标识符，可以是任意符号
 
 ```linux
 遇到需要输入yes 或者 y 的命令，可以是用echo yes | rm -i aa.txt 
+查询软件是否有安装 rpm -qa | grep "软件或者包的名字"
 -i 以交互模式运行
+watch -n 1 "/sbin/ifconfig eth0 | grep bytes" 显示eth0这个网卡的流量
+格式化时间  date +%Y-%m-%d--%T （%T直接显示时分秒）
 ntsysv 看服务是否是开机启动
 cat /var/log/messages 查看系统日志
 cat /var/log/secure 用户登录日志
@@ -319,8 +322,9 @@ cut 命令从文件的每一行剪切字节、字符和字段并将这些字节�
 
  ```shell
 sed可以直接替换文件中的内容
-sed -i 's/原字符串/新字符串/' /home/1.txt
-sed -i 's/原字符串/新字符串/g' /home/1.txt
+sed 's/ //g' filename 去掉所有空格
+sed -i 's/原字符串/新字符串/' /home/1.txt 不加就是匹配到就结束
+sed -i 's/原字符串/新字符串/g' /home/1.txt g表示 匹配每一行有行首到行尾的所有字符
 sed -i 's/\r$//' portainer.sh #win下结尾是\n\r 在linux下是\r 因此需要改下才可以在linux下执行
  ```
 
@@ -329,6 +333,9 @@ sed -i 's/\r$//' portainer.sh #win下结尾是\n\r 在linux下是\r 因此需要
 ``` linux
 awk支持逻辑判断，可以在里面加if else语句等等
 awk 'NR==2{print $2'} NR指定第几行 $指定第几列 NF字段的数量（一行字段数量）length($n)打印出行的字数的个数
+
+以多个分隔符分割
+awk -F'[: |]' '{pritn $0}'（以 : 空格 | 分割）
 
 AWK 包含两种特殊的模式：BEGIN 和 END。
 BEGIN 模式指定了处理文本之前需要执行的操作：
@@ -433,7 +440,7 @@ service是即使生效，重启后失效的命令
 
 find / -name "filename" 查找功能（不要引号也可以）
 
-获取外网地址 curl getip.name
+获取外网地址 curl icanhazip.com
 
 top -n 1代表运行一次就停止，不再刷新，-n运行 数字代表运行多少次
 ```
