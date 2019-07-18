@@ -37,10 +37,19 @@
 
 - ansible命令
 
+> -m代表需要执行的模块
+
 ```ansible
 #将本地文件复制到远程服务器
 	ansible dhy-test -m copy -a "src=/root/dhy dest=/usr/local/docker/ owner=root group=root mode=0644"
 #显示远程主机的详细命令
 	ansible dhy-test -m setup
+#列出主机清单 all可以改为管理名字
+	ansible all --list-hosts
 ```
 
+- 总结
+
+> ansible模块多达2000个，用到哪些学那些。ansible-doc ping 可以查看ping模块的帮助，其他模块同理
+>
+> playbook可以编写很多有用的东西，用到在上网看看
