@@ -17,14 +17,9 @@
 #查询条数 select count(1) from t_demo
 	db.文档名.find().count()
 	
-#查询分页 select * from t_demo limit 10
-	db.文档名.find().limit(10) || db.文档名.find().limit(10).skip(10)（skip代表跳过多少）
-	
 #查询指定 select * from t_demo where id = 1
 	db.文档名.find({"id":"1"})（单个）
 	db.文档名.find({"":"","":""})（多个）
-#排序
-	db.文档名.find().sort({"age":-1})（按照sort里面key的值排序，1为正序，-1为倒序）
 
 #插入 insert into t_demo(name) value(111)
 	db.文档名.insert({"id":"2"})
@@ -37,6 +32,23 @@
 #更新	update t_demo set name = dhy where name = 111
 	db.文档名.update({"id":"2"},{"name":"5"})
 ```
+
+- 排序 分页
+
+> 1是升序，-1是降序
+
+```mongo
+#排序 （按照updateTime降序排序）
+	db.service_monitoring.find().sort({"updateTime":-1})
+	
+#排序
+	db.文档名.find().sort({"age":-1})（按照sort里面key的值排序，1为正序，-1为倒序）
+	
+#查询分页 select * from t_demo limit 10
+	db.文档名.find().limit(10) || db.文档名.find().limit(10).skip(10)（skip代表跳过多少）
+```
+
+
 
 
 
