@@ -28,6 +28,7 @@ EOF是bash中定义的一个结束标识符，可以是任意符号
 
 ```linux
 遇到需要输入yes 或者 y 的命令，可以是用echo yes | rm -i aa.txt 
+后台启动java -jar   nohup java -jar service-0.0.1-releases.jar >/dev/null  &  
 查询软件是否有安装 rpm -qa | grep "软件或者包的名字"
 -i 以交互模式运行
 watch -n 1 "/sbin/ifconfig eth0 | grep bytes" 显示eth0这个网卡的流量
@@ -381,10 +382,13 @@ BEGIN{FS=":";OFS="---"}  FS指以什么分割。OFS是输出的时候以什么�
 ##### java环境变量
 
 ```shell
-export JAVA_HOME=/usr/local/java/jdk1.8.0_131
-export JRE_HOME={JAVA_HOME}/lib:CLASSPATH
-export JAVA_PATH={JRE_HOME}/bin
-export PATH={JAVA_PATH}
+下载对应的jdk版本
+编辑vim /etc/profile文件
+把jdk所在地址加入到环境变量
+export JAVA_HOME=/usr/local/jdk8
+export PATH=$JAVA_HOME/bin:$PATH
+export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+export JRE_HOME=$JAVA_HOME/jre
 ```
 
 ##### 时间转换
