@@ -7,6 +7,7 @@ run
 start/stop/restart 
 kill 杀掉一个容器
 rm
+service 服务操作 常见的ls rm
 pause/unpause 暂停容器中所有的进程 以及 恢复容器中所有的进程。
 create 创建一个新容器但是不启动
 exec 进入容器
