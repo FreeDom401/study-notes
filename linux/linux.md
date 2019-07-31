@@ -65,6 +65,8 @@ cat /etc/crontab 查看官方指导的说明
 > **systemctl是CentOS7的服务管理工具中主要的工具，它融合之前service和chkconfig的功能于一体。**
 
 ```shell
+server开头的是centos6版本  systemctl是centos7版本
+
 服务命令：systemctl command name.service
 服务启动：service name start –> systemctl start name.service
 服务停止：service name stop –> systemctl stop name.service
@@ -98,6 +100,7 @@ linux版本信息：lsb_release -a
  	启动： systemctl start firewalld
     查看状态： systemctl status firewalld 
     停止运行： systemctl stop firewalld
+    重启：systemctl restart firewalld
     
 配置firewalld-cmd
     查看版本： firewall-cmd --version
