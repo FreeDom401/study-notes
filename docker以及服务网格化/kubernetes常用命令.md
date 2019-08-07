@@ -12,4 +12,5 @@
 	加入主节点  kubeadm join
 	还原所有的kubeadm join 和 kubeadm init 操作    kubeadm reset
 	重启kubernetes   systemctl restart kubelet.service
+	查看kubelet 的状态   systemctl status kubelet
 

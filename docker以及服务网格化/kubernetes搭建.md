@@ -1,5 +1,4 @@
 <center><h1>kubernetes搭建</h1><center/>
-
 ### 1.环境准备
 
 ```中文
@@ -46,9 +45,8 @@ CPU：最低要求，2 CPU
 	      docker-latest-logrotate \
 	      docker-logrotate \
 	      docker-engine
-		  yum install -y yum-utils \
 	#docker 依赖
-		device-mapper-persistent-data lvm2
+		yum install -y yum-utils device-mapper-persistent-data lvm2
 	#docker源
 		yum-config-manager \
 		--add-repo \
@@ -59,16 +57,24 @@ CPU：最低要求，2 CPU
 		systemctl enable docker
 		systemctl start docker
 ### 4.修改镜像
+
     #在国内不翻墙无法下载到谷歌的镜像，所以把镜像改成阿里云的镜像
     cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+    
     [kubernetes]
+    
     name=Kubernetes
-    baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64
+    
+    baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/
+    
     enabled=1
+    
     gpgcheck=1
+    
     repo_gpgcheck=1
-    gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg
-    https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
+    
+    gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
+    
     EOF
 ### 5.下载镜像
 
@@ -107,6 +113,8 @@ docker rmi registry.cn-beijing.aliyuncs.com/musker/flannel:v0.11.0-amd64
 
 ```shell
 yum install -y kubeadm kubectl kubelet
+
+Kubelet负责与其他节点集群通信，并进行本节点Pod和容器生命周期的管理。Kubeadm是Kubernetes的自动化部署工具，降低了部署难度，提高效率。Kubectl是Kubernetes集群管理工具。
 ```
 
 ### 到此从节点可以不用配置了。其实在这里可以只用一台虚拟机。然后复制出其他的几台即可
@@ -145,11 +153,13 @@ yum install -y kubeadm kubectl kubelet
     kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
     #可以再次执行 kubectl get node 看到节点变为Ready
 ### 4.从节点加入主节点
+
     #每个人的不一样，这条命令在配置master节点的时候出现过
         kubeadm join 192.168.38.172:6443 --token gsl5pp.88m3bomhhasq30pf \
         --discovery-token-ca-cert-hash sha256:0a715d2595a235fd54070e57cf60229350f73790533625cc889688ccc7071ded
     #在master节点查看 kubectl get node 看到从节点成功加入
 ### 5.配置Dashboard可视化界面
+
 ```shell
     kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v1.10.1/src/deploy/recommended/kubernetes-dashboard.yaml
 #修改为Type=NodePort模式
@@ -171,3 +181,5 @@ yum install -y kubeadm kubectl kubelet
 #Dashboard可视化界面需要使用https加密传输，因此在输入ip和端口号的时候指定https协议
     例如 https://192.168.38.172:30001
 ```
+
+k8s集群问题整理：<https://blog.csdn.net/qq_34857250/article/details/82562514>
